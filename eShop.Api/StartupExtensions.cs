@@ -66,13 +66,13 @@ namespace eShop.Api
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Ked.DataAuto API",
-                    Description = "Ked DataAuto API",
-                    TermsOfService = new Uri("https://www.interlife.gr"),
+                    Title = "",
+                    Description = "API",
+                    TermsOfService = new Uri("https://www.gr"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Contact : INTERLIFE IT Department",
-                        Url = new Uri("https://www.interlife.gr/Misc/Pages/contact.aspx")
+                        Name = "Contact : IT Department",
+                        Url = new Uri("https://www.gr")
                     },
                     License = new OpenApiLicense
                     {
@@ -86,20 +86,7 @@ namespace eShop.Api
             });
             builder.Services.AddHealthChecks();
 
-            ////Singleton Redis ConnectionMultiplexer
-            //builder.Services.AddOutputCache(options =>
-            //{
-            //    options.AddBasePolicy(builder =>
-            //        builder.Expire(TimeSpan.FromSeconds(10)));
-            //    options.AddPolicy("Expire30s", builder =>
-            //        builder.Expire(TimeSpan.FromSeconds(30)));
-            //    options.AddPolicy("Expire2m", builder =>
-            //        builder.Expire(TimeSpan.FromMinutes(2)));
-            //    options.AddPolicy("Expire5m", builder =>
-            //        builder.Expire(TimeSpan.FromMinutes(5)));
-            //});
-            //builder.Services.AddSingleton<IConnectionMultiplexer>(sp => { var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("RedisCacheConnectionString"), true); return ConnectionMultiplexer.Connect(configuration); });
-            //builder.Services.AddStackExchangeRedisOutputCache(options => { options.ConnectionMultiplexerFactory = async () => { var multiplexer = builder.Services.BuildServiceProvider().GetRequiredService<IConnectionMultiplexer>(); return await Task.FromResult(multiplexer); }; });
+          
 
             return builder.Build();
         }
