@@ -13,7 +13,12 @@ namespace eShop.Persistence.Configurations.eShop
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasKey(e => e.Id);
+            builder.HasKey(e => e.ProductId);
+            builder.Property(e => e.Name).HasMaxLength(50);
+            builder.Property(e => e.ImageName).HasMaxLength(500);
+            builder.Property(e => e.Category).HasMaxLength(100);
+            builder.Property(e => e.Price).HasPrecision(18,2);
+            builder.Property(e => e.Discount).HasPrecision(18, 2);
         }
     }
 }

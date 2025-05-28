@@ -11,11 +11,12 @@ namespace eShop.Persistence
     public class eShopDbContext : DbContext
     {
         public eShopDbContext(DbContextOptions<eShopDbContext> options) : base(options) { }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Cart> Cart { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(eShopDbContext).Assembly);
-            modelBuilder.Entity<Product>().ToTable("Products");
+            //modelBuilder.Entity<Product>().ToTable("Products");
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

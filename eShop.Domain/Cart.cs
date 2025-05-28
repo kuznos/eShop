@@ -1,7 +1,8 @@
 ﻿namespace eShop.Domain
 {
-    public class Cart
+    public class Cart : AuditableEntity
     {
-        public List<Product>? Products  { get; set; }
+        public Guid CartId { get; set; }
+        public ICollection<Product>? Products  { get; } = new List<Product>();
     }
 }

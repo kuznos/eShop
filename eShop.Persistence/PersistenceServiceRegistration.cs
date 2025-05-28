@@ -18,7 +18,7 @@ namespace eShop.Persistence
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<eShopDbContext>(options =>
-                   options.UseSqlServer(configuration.GetConnectionString("SQLConnectionString")));
+                   options.UseSqlServer(configuration.GetConnectionString("SQLConnectionStringLocal")));
             //services.AddDbContext<eShopDbContext>(options =>
             //      options.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnectionString")));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));

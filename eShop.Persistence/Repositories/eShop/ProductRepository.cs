@@ -15,13 +15,13 @@ namespace eShop.Persistence.Repositories.eShop
 
         public Task<List<Product>> GetProductsByCategory(string category)
         {
-            var products = _dbContext.Products.Where(c => c.Category.Equals(category)).ToListAsync();
+            var products = _dbContext.Product.Where(c => c.Category.Equals(category,StringComparison.InvariantCultureIgnoreCase)).ToListAsync();
             return products;
         }
 
         public Task<List<Product>> GetProductsWithDiscount()
         {
-            var products = _dbContext.Products.Where(c => c.Discount > 0).ToListAsync();
+            var products = _dbContext.Product.Where(c => c.Discount > 0).ToListAsync();
             return products;
         }
     }

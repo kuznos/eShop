@@ -3,11 +3,6 @@ using eShop.Application.Contracts.Persistence.eShop;
 using eShop.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eShop.Application.Features.Products.Queries.GetProduct
 {
@@ -26,7 +21,7 @@ namespace eShop.Application.Features.Products.Queries.GetProduct
 
         public async Task<Product?> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            Product? products = new();
+            Product? product = new();
             try
             {
                 var validator = new GetProductQueryValidator();
@@ -37,18 +32,18 @@ namespace eShop.Application.Features.Products.Queries.GetProduct
                     {
                         _logger.LogWarning($@"Validation error on GetProduct Query for Id {request.Id}, {string.Join(",", ve.ErrorMessage)}");
                     }
-                    return products;
+                    return product;
                 }
                 else
                 {
-                    products = await _productsRepository.GetByIdAsync(request.Id);
+                    product = await _productsRepository.GetByIdAsync(request.Id);
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError($@"Error on GetProduct with RequestId {request.Id}" + Environment.NewLine + ex.Message);
             }
-            return products;
+            return product;
         }
     }
 }
