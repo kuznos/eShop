@@ -8,6 +8,7 @@
         public string Category { get; set; } = string.Empty;
         public decimal Price { get; set; } = 0;
         public decimal Discount { get; set; } = 0;
-        public ICollection<Cart>? Carts { get; } = new List<Cart>();
+		//public Guid CartId { get; set; }
+		//public Cart? Carts { get; set; } = null;
     }
 }

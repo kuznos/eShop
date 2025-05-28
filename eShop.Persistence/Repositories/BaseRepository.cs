@@ -21,7 +21,12 @@ namespace eShop.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-        public async Task<IReadOnlyList<T>> ListAllAsync()
+		public virtual async Task<T> GetByIdAsync(long id)
+		{
+			return await _dbContext.Set<T>().FindAsync(id);
+		}
+
+		public async Task<IReadOnlyList<T>> ListAllAsync()
         {
             return await _dbContext.Set<T>().ToListAsync();
         }
@@ -43,9 +48,6 @@ namespace eShop.Persistence.Repositories
         }
 
 
-        public virtual async Task<T> GetByIdAsync(long id)
-        {
-            return await _dbContext.Set<T>().FindAsync(id);
-        }
+
     }
 }

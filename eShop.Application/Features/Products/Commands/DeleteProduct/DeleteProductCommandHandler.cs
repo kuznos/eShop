@@ -7,18 +7,16 @@ namespace eShop.Application.Features.Products.Commands.DeleteProduct
 {
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, bool>
     {
-        private readonly IMapper _mapper;
         private readonly ILogger<DeleteProductCommandHandler> _logger;
         private readonly IProductRepository _productsRepository;
 
-        public DeleteProductCommandHandler(IMapper mapper, ILogger<DeleteProductCommandHandler> logger, IProductRepository productsRepository)
-        {
-            _mapper = mapper;
-            _logger = logger;
-            _productsRepository = productsRepository;
-        }
+		public DeleteProductCommandHandler(ILogger<DeleteProductCommandHandler> logger, IProductRepository productsRepository)
+		{
+			_logger = logger;
+			_productsRepository = productsRepository;
+		}
 
-        public async Task<bool> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+		public async Task<bool> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
            bool result = false;
             try

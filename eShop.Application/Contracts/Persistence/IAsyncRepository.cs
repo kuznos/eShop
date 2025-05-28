@@ -9,7 +9,7 @@ namespace eShop.Application.Contracts.Persistence
     public interface IAsyncRepository<T> where T : class
     {
         Task<T> GetByIdAsync(Guid id);
-        Task<T> GetByIdAsync(Int64 id);
+        Task<T> GetByIdAsync(long id);
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);

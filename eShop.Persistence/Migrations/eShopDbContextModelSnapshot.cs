@@ -22,21 +22,6 @@ namespace eShop.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CartProduct", b =>
-                {
-                    b.Property<Guid>("CartsCartId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductsProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CartsCartId", "ProductsProductId");
-
-                    b.HasIndex("ProductsProductId");
-
-                    b.ToTable("CartProduct");
-                });
-
             modelBuilder.Entity("eShop.Domain.Cart", b =>
                 {
                     b.Property<Guid>("CartId")
@@ -58,6 +43,9 @@ namespace eShop.Persistence.Migrations
                 {
                     b.Property<Guid>("ProductId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CartId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Category")
@@ -91,22 +79,21 @@ namespace eShop.Persistence.Migrations
 
                     b.HasKey("ProductId");
 
+                    b.HasIndex("CartId");
+
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("CartProduct", b =>
+            modelBuilder.Entity("eShop.Domain.Product", b =>
                 {
                     b.HasOne("eShop.Domain.Cart", null)
-                        .WithMany()
-                        .HasForeignKey("CartsCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Products")
+                        .HasForeignKey("CartId");
+                });
 
-                    b.HasOne("eShop.Domain.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("eShop.Domain.Cart", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

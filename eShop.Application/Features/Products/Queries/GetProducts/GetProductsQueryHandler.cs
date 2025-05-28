@@ -27,7 +27,7 @@ namespace eShop.Application.Features.Products.Queries.GetProducts
 
         public async Task<List<Product>?> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
-            List<Product>? products = new();
+            List<Product>? products = null;
             try
             {
                 products = (List<Product>)await _productsRepository.ListAllAsync();

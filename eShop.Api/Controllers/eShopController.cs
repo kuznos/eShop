@@ -1,5 +1,4 @@
 ﻿using Asp.Versioning;
-using eShop.Api.Models;
 using eShop.Application.Features.Products.Commands.CreateProduct;
 using eShop.Application.Features.Products.Commands.DeleteProduct;
 using eShop.Application.Features.Products.Queries.GetProduct;
@@ -48,7 +47,7 @@ namespace eShop.Api.Controllers
         /// <returns>A product</returns>
         [ApiVersion("1.0")]
         [HttpGet("v{version:apiVersion}/products/{id}", Name = "GetProduct")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<string>> GetProduct(Guid id)
         {
@@ -86,10 +85,10 @@ namespace eShop.Api.Controllers
         /// <param name="ProductRequestDTO"></param>
         /// <returns>A new product.</returns>
         [ApiVersion("1.0")]
-        [HttpPost("v{version:apiVersion}/product", Name = "CreateProductAsync")]
+        [HttpPost("v{version:apiVersion}/products", Name = "CreateProductAsync")]
         [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Product>> GetDeclarationIdAsync([FromBody] ProductRequestDTO ProductRequestDTO)
+        public async Task<ActionResult<Product>> GetDeclarationIdAsync([FromBody] CreateProductRequestDTO ProductRequestDTO)
         {
 
             Product? result = await _mediator.Send(new CreateProductCommand()
@@ -102,7 +101,7 @@ namespace eShop.Api.Controllers
             });
 
             if (result is Product)
-                return Created($@"api/declaration/{result.ProductId}", result);
+                return Created($@"api/products/{result.ProductId}", result);
             else
                 return BadRequest(result);
         }
@@ -114,7 +113,7 @@ namespace eShop.Api.Controllers
         /// <param name="id"></param>
         /// <returns>Boolean.</returns>
         [ApiVersion("1.0")]
-        [HttpDelete("v{version:apiVersion}/product/{id}", Name = "DeleteProductAsync")]
+        [HttpDelete("v{version:apiVersion}/products/{id}", Name = "DeleteProductAsync")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Product>> DeleteProductAsync(Guid id)

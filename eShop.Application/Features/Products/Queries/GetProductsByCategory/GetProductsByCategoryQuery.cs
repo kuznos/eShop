@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace eShop.Application.Features.Products.Queries.GetProductsByCategory
 {
-    public class GetProductsByCategoryQuery : IRequest<List<Product>?>
-    {
-        public string Category { get; set; }
-    }
+	public class GetProductsByCategoryQuery : IRequest<List<Product>?>
+	{
+		public string Category { get; set; }
+	}
 }
