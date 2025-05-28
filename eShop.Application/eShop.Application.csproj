@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Cart\" />
-    <Folder Include="Features\Products\Commands\DeleteProduct\" />
   </ItemGroup>
 
 </Project>

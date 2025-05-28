@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using eShop.Api.Models;
 using eShop.Application.Features.Products.Commands.CreateProduct;
+using eShop.Application.Features.Products.Commands.DeleteProduct;
 using eShop.Application.Features.Products.Queries.GetProduct;
 using eShop.Application.Features.Products.Queries.GetProducts;
 using eShop.Application.Features.Products.Queries.GetProductsByCategory;
@@ -101,15 +102,34 @@ namespace eShop.Api.Controllers
             });
 
             if (result is Product)
-            {
                 return Created($@"api/declaration/{result.ProductId}", result);
-            }
             else
-            {
                 return BadRequest(result);
-            }
         }
 
+
+        /// <summary>
+        /// Delete a product.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Boolean.</returns>
+        [ApiVersion("1.0")]
+        [HttpDelete("v{version:apiVersion}/product/{id}", Name = "DeleteProductAsync")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Product>> DeleteProductAsync(Guid id)
+        {
+
+            bool result = await _mediator.Send(new DeleteProductCommand()
+            {
+                Id = id               
+            });
+
+            if (result)
+                return NoContent();
+            else
+                return BadRequest(result);
+        }
 
     }
 }
